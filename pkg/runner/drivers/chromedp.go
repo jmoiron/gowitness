@@ -352,6 +352,7 @@ func (run *Chromedp) Witness(target string, thisRunner *runner.Runner) (*models.
 	// run any javascript we have
 	if run.options.Scan.JavaScript != "" {
 		// maybe can be added to outputs?
+		logger.Debug("running user-provided javascript", "source", run.options.Scan.JavaScript)
 		var jsResult []byte
 		if err := chromedp.Run(navigationCtx, chromedp.EvaluateAsDevTools(run.options.Scan.JavaScript, &jsResult)); err != nil {
 			return nil, fmt.Errorf("failed to evaluate user-provided javascript: %w", err)
